@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フセイン・アビド - Web開発者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f3f4f6;
+            --text: #1f2937;
+            --light-text: #6b7280;
+            --background: #ffffff;
+            --accent: #e5e7eb;
+            --border: #d1d5db;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', 'Montserrat', sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.3rem;
+            width: 25px;
+        }
+        
+        .hero-image {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .profile-card {
+            width: 100%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .profile-card h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .profile-card p {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .info-item {
+            background: var(--secondary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .info-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: var(--background);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.5rem;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 10px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--primary);
+        }
+        
+        .timeline-content {
+            background: var(--background);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .timeline-content:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* Language Section */
+        .language-section {
+            background: var(--secondary);
+        }
+        
+        .languages-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .language-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 220px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .language-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .language-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .level-bar {
+            height: 8px;
+            background: var(--accent);
+            border-radius: 4px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+        
+        .level-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text {
+                order: 2;
+                text-align: center;
+            }
+            
+            .hero-image {
+                order: 1;
+            }
+            
+            .hero-text h1,
+            .hero-text h2,
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .contact-info {
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 10rem 0 4rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">フセイン・アビド</div>
+            <div class="nav-links">
+                <a href="#about">自己紹介</a>
+                <a href="#skills">スキル</a>
+                <a href="#experience">経歴</a>
+                <a href="#languages">語学</a>
+                <a href="#contact">連絡先</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>フセイン・アビド</h1>
+                <h2>Web開発者 & プログラマー</h2>
+                <p>IT分野で働くことが私の夢でした。大学でソフトウェア工学を学びましたが、4学期目の試験に合格できませんでした。その後、コンピュータサイエンスで再入学しましたが、再び失敗し、卒業できませんでした。2018年に日本に移住し、IT分野で働く夢を叶えるため、Web開発コースで6ヶ月間勉強しました。</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>abitakayasu@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>070-2332-3311</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>東京都羽村市緑ケ丘5-17-21</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <div class="profile-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>フセイン・アビド</h3>
+                    <p>Web開発者</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>パキスタン出身</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-birthday-cake"></i>
+                            <span>1994年3月25日生 (31歳)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">自己紹介</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>現在は日野の工場でトヨタSUVの製造に携わっていますが、大学ではコンピュータサイエンスを学び、C++、JavaScript、HTML、PHP、CSS、オブジェクト指向プログラミングなどを履修しました。また、「はじめてのWebサイト制作科」を修了し、プログラミングと問題解決が得意です。</p>
+                    
+                    <p>2018年に日本に移住してからは、佐川運輸で荷物の仕分けやトラックへの積み込み作業に従事しました。その後、ヤマト運輸では外国人学生の面接、エントリーシートの作成支援、新しい労働者のためのロッカーの準備、ユニフォームやヘルメット、作業靴の提供などオフィス業務を経験しました。</p>
+                </div>
+                <div class="about-text">
+                    <p>現在はフジ技研株式会社でトヨタランドクルーザーの製造ラインに携わっていますが、IT分野で働くという夢を叶えるため、現在「フルリモート研修／IT・英語・未経験OK／グローバルサポート」のポジションに応募しています。</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-graduation-cap"></i> 最終学歴</h4>
+                            <p>Chitral New City College 高校卒業</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-certificate"></i> 資格</h4>
+                            <p>はじめてのWebサイト制作科 (2021年5月)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-briefcase"></i> 職種希望</h4>
+                            <p>Web開発、ITサポート</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> 勤務地希望</h4>
+                            <p>東京、リモート勤務</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">技術スキル</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> プログラミング言語</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">HTML5</div>
+                        <div class="skill-item">CSS3</div>
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">PHP</div>
+                        <div class="skill-item">C++</div>
+                        <div class="skill-item">Python</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i> Web技術</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">レスポンシブデザイン</div>
+                        <div class="skill-item">Bootstrap</div>
+                        <div class="skill-item">jQuery</div>
+                        <div class="skill-item">RESTful API</div>
+                        <div class="skill-item">Git</div>
+                        <div class="skill-item">オブジェクト指向</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> その他スキル</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">問題解決</div>
+                        <div class="skill-item">チームワーク</div>
+                        <div class="skill-item">プロジェクト管理</div>
+                        <div class="skill-item">ドキュメンテーション</div>
+                        <div class="skill-item">品質管理</div>
+                        <div class="skill-item">コミュニケーション</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">職務経歴</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025年1月 - 現在</span>
+                        <h3>フジ技研株式会社</h3>
+                        <p>製造エンジニア</p>
+                        <ul>
+                            <li>トヨタSUVの製造プロセスに貢献</li>
+                            <li>生産ラインのプロセス改善を実施</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2023年7月 - 2024年10月</span>
+                        <h3>株式会社ジャパンクリエイト</h3>
+                        <p>技術スタッフ</p>
+                        <ul>
+                            <li>技術操作とメンテナンスをサポート</li>
+                            <li>エンジニアリングチームとプロジェクトで協力</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2022年9月 - 2023年7月</span>
+                        <h3>ヤマト運輸株式会社</h3>
+                        <p>オフィスコーディネーター</p>
+                        <ul>
+                            <li>外国人学生の面接と採用業務</li>
+                            <li>エントリーシート作成支援</li>
+                            <li>新人労働者のためのロッカー準備</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2018年 - 2020年</span>
+                        <h3>佐川運輸</h3>
+                        <p>物流スペシャリスト</p>
+                        <ul>
+                            <li>荷物の仕分けとトラック積み込み</li>
+                            <li>効率化のための積み込みプロセス改善</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section id="languages" class="language-section">
+        <div class="container">
+            <h2 class="section-title">語学能力</h2>
+            <div class="languages-container">
+                <div class="language-card">
+                    <div class="language-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>日本語</h3>
+                    <p>会話レベル</p>
+                    <div class="level-bar">
+                        <div class="level-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>英語</h3>
+                    <p>ビジネスレベル</p>
+                    <div class="level-bar">
+                        <div class="level-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>ウルドゥー語</h3>
+                    <p>ネイティブレベル</p>
+                    <div class="level-bar">
+                        <div class="level-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>ヒンディー語</h3>
+                    <p>ビジネスレベル</p>
+                    <div class="level-bar">
+                        <div class="level-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>フセイン・アビド</h3>
+                    <p>情熱的なWeb開発者で、IT分野で働くことを夢見ています。様々な職務経験を通じて培った問題解決能力とチームワークスキルを活かし、新しい挑戦に取り組みます。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>連絡先</h3>
+                    <p><i class="fas fa-envelope"></i> abitakayasu@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 070-2332-3311</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 〒205-0003 東京都羽村市緑ケ丘5-17-21</p>
+                    <p><i class="fas fa-clock"></i> 対応可能時間: 平日18時以降、週末</p>
+                </div>
+                <div class="footer-column">
+                    <h3>求職情報</h3>
+                    <p><i class="fas fa-briefcase"></i> 希望職種: Web開発者、ITサポート</p>
+                    <p><i class="fas fa-map-marked-alt"></i> 希望勤務地: 東京、リモート</p>
+                    <p><i class="fas fa-yen-sign"></i> 希望給与: 応相談</p>
+                    <p><i class="fas fa-passport"></i> ビザサポート: 不要 (エンジニア/専門職ビザ所持)</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 フセイン・アビド. すべての権利を保有。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Timeline animation
+        const timelineItems = document.querySelectorAll('.timeline-content');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        timelineItems.forEach(item => {
+            item.style.opacity = 0;
+            item.style.transform = 'translateX(-20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
